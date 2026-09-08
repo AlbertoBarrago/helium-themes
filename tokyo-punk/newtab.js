@@ -87,6 +87,15 @@
      ============================================================ */
   function applyConfig() {
     if (CFG.title) document.title = CFG.title;
+    if (CFG.favicon) {
+      let link = document.querySelector("link[rel='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = CFG.favicon;
+    }
     if (CFG.brand) {
       const he = document.querySelector(".brand-he");
       const ium = document.querySelector(".brand-ium");
@@ -247,6 +256,27 @@
   });
 
   /* ============================================================
+     Quote of the day (stabile per tutta la giornata)
+     ============================================================ */
+  function applyQuote() {
+    const el = document.getElementById("quote");
+    if (!el) return;
+    const list = Array.isArray(CFG.quotes) ? CFG.quotes : [];
+    if (CFG.showQuote === false || !list.length) {
+      el.hidden = true;
+      return;
+    }
+    const now = new Date();
+    const dayKey = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+    let hash = 0;
+    for (let i = 0; i < dayKey.length; i++) {
+      hash = (hash * 31 + dayKey.charCodeAt(i)) >>> 0;
+    }
+    el.textContent = list[hash % list.length];
+    el.hidden = false;
+  }
+
+  /* ============================================================
      Settings panel
      ============================================================ */
   function openSettings() {
@@ -345,6 +375,7 @@
 
     applyBackground();
     applyConfig();
+    applyQuote();
     renderQuickLinks();
     tickClock();
     updateNetwork();
