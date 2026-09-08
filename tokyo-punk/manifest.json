@@ -45,9 +45,9 @@
       "tab_selected": [22, 30, 46],
       "tab_hover": [22, 30, 46],
       "tab_stroke": [45, 226, 230],
-      "tab_stroke_inactive": [38, 50, 74],
+      "tab_stroke_inactive": [77, 166, 255],
       "tab_stroke_incognito": [45, 226, 230],
-      "tab_stroke_incognito_inactive": [38, 50, 74],
+      "tab_stroke_incognito_inactive": [77, 166, 255],
 
       "bookmark_text": [200, 211, 245],
 

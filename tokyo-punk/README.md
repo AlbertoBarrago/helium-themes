@@ -52,10 +52,20 @@ state, and the session start time. No fake metrics.
 | File | Purpose |
 | --- | --- |
 | `manifest.json` | Theme colors + new tab override |
+| `config.js` | **All start-screen settings in one place** (title, brand, search engine, quick links, opacity, background) |
 | `newtab.html` | Tokyo Node start screen markup |
 | `newtab.css` | Tokens (`--tp-*`) and styling |
 | `newtab.js` | Clock, network, session, image persistence |
 | `icon128.png` | Theme icon |
+
+## Configure the start screen
+
+Edit **`config.js`** to change the title, the "hi, albz :)" brand, the default
+search engine, the quick links, the image opacity, and the abstract background
+toggle. Reload the new tab (Cmd+T) after editing. No code changes needed.
+
+You can also click the gear (bottom-right) on the new tab page for the
+interactive settings (background image, opacity, search engine, quick links).
 
 ## Known limitations (Chromium / Helium)
 

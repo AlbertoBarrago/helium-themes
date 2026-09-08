@@ -36,18 +36,22 @@
     },
   };
 
+  const CFG = (typeof window.TOKYO_CONFIG === "object" && window.TOKYO_CONFIG) || {};
+
   const DEFAULTS = {
     image: null, // data URL or remote URL
-    imageOpacity: 35,
-    tokyoBg: true,
-    searchEngine: "https://duckduckgo.com/?q=",
-    quickLinks: [
-      { name: "GitHub", url: "https://github.com" },
-      { name: "YouTube", url: "https://youtube.com" },
-      { name: "Reddit", url: "https://reddit.com" },
-      { name: "Hacker News", url: "https://news.ycombinator.com" },
-      { name: "X", url: "https://x.com" },
-    ],
+    imageOpacity: CFG.imageOpacity != null ? CFG.imageOpacity : 35,
+    tokyoBg: CFG.tokyoBg != null ? CFG.tokyoBg : true,
+    searchEngine: CFG.searchEngine || "https://www.google.com/search?q=",
+    quickLinks: Array.isArray(CFG.quickLinks) && CFG.quickLinks.length
+      ? CFG.quickLinks
+      : [
+          { name: "GitHub", url: "https://github.com" },
+          { name: "YouTube", url: "https://youtube.com" },
+          { name: "Reddit", url: "https://reddit.com" },
+          { name: "Hacker News", url: "https://news.ycombinator.com" },
+          { name: "X", url: "https://x.com" },
+        ],
   };
 
   const els = {
@@ -77,6 +81,21 @@
   };
 
   let state = { ...DEFAULTS };
+
+  /* ============================================================
+     Config: titolo e brand dal file config.js
+     ============================================================ */
+  function applyConfig() {
+    if (CFG.title) document.title = CFG.title;
+    if (CFG.brand) {
+      const he = document.querySelector(".brand-he");
+      const ium = document.querySelector(".brand-ium");
+      const sep = document.querySelector(".brand-sep");
+      if (he && CFG.brand.he != null) he.textContent = CFG.brand.he;
+      if (ium && CFG.brand.ium != null) ium.textContent = CFG.brand.ium;
+      if (sep && CFG.brand.sep != null) sep.textContent = CFG.brand.sep;
+    }
+  }
 
   /* ============================================================
      Clock (real local time)
@@ -325,6 +344,7 @@
     if (saved[4] != null) state.quickLinks = saved[4];
 
     applyBackground();
+    applyConfig();
     renderQuickLinks();
     tickClock();
     updateNetwork();
