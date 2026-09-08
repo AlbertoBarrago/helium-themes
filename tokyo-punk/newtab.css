@@ -440,6 +440,83 @@ body {
 }
 
 /* ============================================================
+   "I feel drunk" button + popup
+   ============================================================ */
+
+.drunk {
+  position: fixed;
+  right: 18px;
+  bottom: 62px;
+  z-index: 5;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--tp-surface);
+  color: var(--tp-text-muted);
+  border: 1px solid var(--tp-border);
+  border-radius: var(--tp-radius-sm);
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--tp-transition);
+}
+
+.drunk:hover {
+  color: var(--tp-magenta);
+  border-color: rgba(255, 79, 216, 0.4);
+  box-shadow: 0 0 10px rgba(255, 79, 216, 0.12);
+}
+
+.drunk:focus-visible {
+  outline: none;
+  border-color: var(--tp-magenta);
+  box-shadow: 0 0 0 1px rgba(255, 79, 216, 0.3);
+}
+
+.drunk-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 7, 12, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.drunk-pop[hidden] {
+  display: none;
+}
+
+.drunk-pop-panel {
+  width: min(460px, 92vw);
+  padding: 24px;
+  background: var(--tp-surface);
+  border: 1px solid var(--tp-border);
+  border-radius: var(--tp-radius-lg);
+  box-shadow: 0 0 0 1px rgba(11, 15, 23, 0.5), 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.drunk-text {
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--tp-text);
+}
+
+.drunk-author {
+  margin: 0 0 18px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--tp-purple);
+}
+
+.drunk-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ============================================================
    Settings panel
    ============================================================ */
 

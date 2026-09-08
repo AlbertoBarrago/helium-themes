@@ -43,6 +43,11 @@ Click the gear (bottom-right) on the new tab page:
 - **Search engine**: pick DuckDuckGo, Google, Bing, or Brave.
 - **Quick links**: add and remove shortcuts shown under the search bar. Each
   link opens in a new tab. Stored locally, no remote dependency.
+- **Daily quote**: a motivational quote, stable for the whole day (changes at
+  midnight). Edit `quotes` in `config.js`.
+- **"I feel drunk" button** (bottom-right, above the gear): fires a random
+  famous quote (with author) or a programmer joke. Edit `famousQuotes` and
+  `jokes` in `config.js`.
 
 The start screen shows only real data: local clock, online/offline network
 state, and the session start time. No fake metrics.

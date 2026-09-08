@@ -65,6 +65,12 @@
     gear: document.getElementById("gear"),
     settings: document.getElementById("settings"),
     settingsClose: document.getElementById("settings-close"),
+    drunk: document.getElementById("drunk"),
+    drunkPop: document.getElementById("drunk-pop"),
+    drunkText: document.getElementById("drunk-text"),
+    drunkAuthor: document.getElementById("drunk-author"),
+    drunkAgain: document.getElementById("drunk-again"),
+    drunkClose: document.getElementById("drunk-close"),
     imageFile: document.getElementById("image-file"),
     imageUrl: document.getElementById("image-url"),
     imageUrlApply: document.getElementById("image-url-apply"),
@@ -275,6 +281,41 @@
     el.textContent = list[hash % list.length];
     el.hidden = false;
   }
+
+  /* ============================================================
+     "I feel drunk": random famous quote or joke
+     ============================================================ */
+  function showDrunk() {
+    const famous = Array.isArray(CFG.famousQuotes) ? CFG.famousQuotes : [];
+    const jokes = Array.isArray(CFG.jokes) ? CFG.jokes : [];
+    const pool = [];
+    famous.forEach((q) => pool.push({ text: q.text, author: q.author }));
+    jokes.forEach((j) => pool.push({ text: j, author: null }));
+    if (!pool.length) return;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    els.drunkText.textContent = pick.text;
+    if (pick.author) {
+      els.drunkAuthor.textContent = "\u2014 " + pick.author;
+      els.drunkAuthor.hidden = false;
+    } else {
+      els.drunkAuthor.hidden = true;
+    }
+    els.drunkPop.hidden = false;
+  }
+
+  function closeDrunk() {
+    els.drunkPop.hidden = true;
+  }
+
+  els.drunk.addEventListener("click", showDrunk);
+  els.drunkAgain.addEventListener("click", showDrunk);
+  els.drunkClose.addEventListener("click", closeDrunk);
+  els.drunkPop.addEventListener("click", (e) => {
+    if (e.target === els.drunkPop) closeDrunk();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !els.drunkPop.hidden) closeDrunk();
+  });
 
   /* ============================================================
      Settings panel

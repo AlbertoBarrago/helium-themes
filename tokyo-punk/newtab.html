@@ -61,6 +61,18 @@
   </main>
 
   <button class="gear" id="gear" title="Tokyo Punk config" aria-label="Open Tokyo Punk configuration">&#9881;</button>
+  <button class="drunk" id="drunk" title="I feel drunk" aria-label="Show a random quote or joke">&#127866;</button>
+
+  <div class="drunk-pop" id="drunk-pop" hidden>
+    <div class="drunk-pop-panel" role="dialog" aria-label="Random quote or joke">
+      <p class="drunk-text" id="drunk-text"></p>
+      <p class="drunk-author" id="drunk-author" hidden></p>
+      <div class="drunk-actions">
+        <button type="button" id="drunk-again" class="btn">Another one</button>
+        <button type="button" id="drunk-close" class="btn ghost">Close</button>
+      </div>
+    </div>
+  </div>
 
   <div class="settings" id="settings" hidden>
     <div class="settings-panel" role="dialog" aria-label="Tokyo Punk configuration">
