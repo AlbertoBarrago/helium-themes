@@ -1,29 +1,32 @@
 /* ============================================================
-   Tokyo Punk // Configurazione
-   Modifica qui i parametri della start screen, senza toccare
-   il codice. Ricarica la nuova tab (Cmd+T) dopo ogni modifica.
+   Tokyo Punk // Configuration
+   Edit the start-screen settings here, no code changes needed.
+   Reload the new tab (Cmd+T) after editing.
    ============================================================ */
 
 window.TOKYO_CONFIG = {
-	/* Titolo mostrato nella barra delle tab */
+	/* Title shown in the tab bar */
 	title: "blank",
 
-	/* Icona della tab (favicon). Può essere un file locale (es. "favicon.svg")
-	   o una URL remota (es. "https://example.com/icon.png") */
+	/* Tab icon (favicon). Can be a local file (e.g. "favicon.svg")
+	   or a remote URL (e.g. "https://example.com/icon.png") */
 	favicon: "favicon.svg",
 
-	/* Brand in alto: tre parti (colori: he=cyan, ium=testo, sep=grigio) */
+	/* Brand at the top: three parts (colors: he=cyan, ium=text, sep=muted) */
 	brand: {
 		he: "hi, ",
 		ium: "albz",
 		sep: ":)",
 	},
 
-	/* Motore di ricerca di default.
-	   Formato: URL + "?q=" (o equivalente) */
+	/* Brand URL: clicking "albz" opens this link (set false to disable) */
+	brandUrl: "https://albz.it",
+
+	/* Default search engine.
+	   Format: URL + "?q=" (or equivalent) */
 	searchEngine: "https://www.google.com/search?q=",
 
-	/* Quick links mostrati sotto la barra di ricerca */
+	/* Quick links shown below the search bar */
 	quickLinks: [
 		{ name: "GitHub", url: "https://github.com" },
 		{ name: "YouTube", url: "https://youtube.com" },
@@ -32,8 +35,8 @@ window.TOKYO_CONFIG = {
 		{ name: "X", url: "https://x.com" },
 	],
 
-	/* Quote del giorno: una random al giorno, stabile per tutta la giornata.
-	   Metti false per disattivarle. */
+	/* Quote of the day: one random quote per day, stable all day.
+	   Set false to disable. */
 	showQuote: true,
 	quotes: [
 		"fallisci il 100% delle volte quello che non provi",
@@ -88,7 +91,7 @@ window.TOKYO_CONFIG = {
 		"non puoi tornare indietro e cambiare l'inizio, ma puoi iniziare da dove sei e cambiare il finale",
 	],
 
-	/* Quote con autore: usate dal bottone "I feel drunk" (massime celebri) */
+	/* Famous quotes with authors: used by the "I feel drunk" button */
 	famousQuotes: [
 		{ text: "fallisci il 100% delle volte quello che non provi", author: "Wayne Gretzky" },
 		{ text: "il modo migliore per prevedere il futuro è inventarlo", author: "Alan Kay" },
@@ -112,7 +115,7 @@ window.TOKYO_CONFIG = {
 		{ text: "la motivazione ti fa partire, l'abitudine ti fa arrivare", author: "Jim Ryun" },
 	],
 
-	/* Barzellette: usate dal bottone "I feel drunk" */
+	/* Jokes: used by the "I feel drunk" button */
 	jokes: [
 		"perché i programmatori confondono Halloween e Natale? perché OCT 31 = DEC 25",
 		"ci sono 10 tipi di persone: quelle che capiscono il binario e quelle che non lo capiscono",
@@ -136,9 +139,9 @@ window.TOKYO_CONFIG = {
 		"un programmatore muore e va in paradiso. san pietro dice 'ecco, qui tutto è perfetto'. il programmatore risponde 'perfetto? ma non c'è un bug da fixare?'",
 	],
 
-	/* Opacità immagine di sfondo (0-100) */
+	/* Background image opacity (0-100) */
 	imageOpacity: 35,
 
-	/* Mostra lo sfondo astratto Tokyo (gradient/grid/scanlines) */
+	/* Show the abstract Tokyo background (gradient/grid/scanlines) */
 	tokyoBg: true,
 };

@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Pepe the Frog favicon -->
-  <rect width="64" height="64" rx="12" fill="#0b0f17"/>
-  <!-- head -->
-  <ellipse cx="32" cy="34" rx="22" ry="20" fill="#4a9e3f"/>
-  <!-- eyes -->
-  <circle cx="22" cy="26" r="7" fill="#ffffff"/>
-  <circle cx="42" cy="26" r="7" fill="#ffffff"/>
-  <circle cx="22" cy="26" r="3.5" fill="#111"/>
-  <circle cx="42" cy="26" r="3.5" fill="#111"/>
-  <!-- mouth -->
-  <path d="M18 40 Q32 50 46 40" stroke="#2c6b24" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Tokyo Punk favicon: bold ">" chevron in theme cyan on black -->
+  <rect width="64" height="64" fill="#0b0f17"/>
+  <path d="M20 12 L48 32 L20 52" fill="none" stroke="#2de2e6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

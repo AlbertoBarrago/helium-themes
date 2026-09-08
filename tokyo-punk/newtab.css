@@ -157,6 +157,16 @@ body {
   color: var(--tp-text);
 }
 
+.brand-ium[data-link] {
+  cursor: pointer;
+  transition: var(--tp-transition);
+}
+
+.brand-ium[data-link]:hover {
+  color: var(--tp-cyan);
+  text-shadow: 0 0 14px rgba(45, 226, 230, 0.35);
+}
+
 .brand-sep {
   color: var(--tp-text-muted);
   margin: 0 10px;

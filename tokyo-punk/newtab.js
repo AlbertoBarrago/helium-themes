@@ -110,6 +110,23 @@
       if (ium && CFG.brand.ium != null) ium.textContent = CFG.brand.ium;
       if (sep && CFG.brand.sep != null) sep.textContent = CFG.brand.sep;
     }
+    // Brand cliccabile: "albz" apre brandUrl
+    const ium = document.querySelector(".brand-ium");
+    if (ium) {
+      if (CFG.brandUrl) {
+        ium.style.cursor = "pointer";
+        ium.title = CFG.brandUrl;
+        ium.setAttribute("data-link", "true");
+        ium.onclick = () => {
+          window.open(CFG.brandUrl, "_blank", "noopener");
+        };
+      } else {
+        ium.style.cursor = "default";
+        ium.title = "";
+        ium.removeAttribute("data-link");
+        ium.onclick = null;
+      }
+    }
   }
 
   /* ============================================================
