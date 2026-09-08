@@ -1,4 +1,4 @@
-# hellium-themes
+# helium-themes
 
 Custom themes for the **Helium** browser (Chromium-based).
 
@@ -36,8 +36,8 @@ local file via the `--custom-ntp` flag (set in `chrome://flags`, search
 "custom-ntp"):
 
 ```
-file:///Users/albz/Projects/hellium-themes/tokyo-punk/newtab.html
-file:///Users/albz/Projects/hellium-themes/ember-molten/newtab.html
+file:///Users/albz/Projects/helium-themes/tokyo-punk/newtab.html
+file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html
 ```
 
 Each theme's start screen is fully configurable from its `config.js` (title,

@@ -26,13 +26,13 @@ new tab page. To make Ember Node your home, point Helium at the local file via
 the `--custom-ntp` flag:
 
 ```
-file:///Users/albz/Projects/hellium-themes/ember-molten/newtab.html
+file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html
 ```
 
 Set it in `chrome://flags` (search "custom-ntp") or launch with:
 
 ```
-open -a Helium --args --custom-ntp="file:///Users/albz/Projects/hellium-themes/ember-molten/newtab.html"
+open -a Helium --args --custom-ntp="file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html"
 ```
 
 ## Configure the start screen
