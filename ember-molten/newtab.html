@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blank</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="newtab.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <!-- Layered CSS-generated background (no remote assets) -->
+  <div class="bg" id="bg" aria-hidden="true"></div>
+  <div class="bg-image" id="bg-image" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grid" aria-hidden="true"></div>
+
+  <main class="console">
+    <header class="console-header">
+      <div class="brand">
+        <span class="brand-he">hi, </span><span class="brand-ium">albz</span>
+        <span class="brand-sep">:)</span>
+      </div>
+      <div class="status-line">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">SYSTEM ONLINE</span>
+      </div>
+    </header>
+
+    <form class="search" id="search-form" role="search">
+      <span class="prompt" aria-hidden="true">&gt;</span>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="search the web"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search the web"
+      >
+    </form>
+
+    <p class="quote" id="quote" hidden></p>
+
+    <nav class="quicklinks" id="quicklinks" aria-label="Quick links"></nav>
+
+    <footer class="console-footer">
+      <div class="stat">
+        <span class="stat-label">LOCAL TIME</span>
+        <span class="stat-value" id="clock">--:--:--</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">NETWORK</span>
+        <span class="stat-value" id="network">--</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">SESSION</span>
+        <span class="stat-value" id="session">--</span>
+      </div>
+    </footer>
+  </main>
+
+  <button class="gear" id="gear" title="Ember Molten config" aria-label="Open Ember Molten configuration">&#9881;</button>
+  <button class="drunk" id="drunk" title="I feel drunk" aria-label="Show a random quote or joke">&#127866;</button>
+
+  <div class="drunk-pop" id="drunk-pop" hidden>
+    <div class="drunk-pop-panel" role="dialog" aria-label="Random quote or joke">
+      <p class="drunk-text" id="drunk-text"></p>
+      <p class="drunk-author" id="drunk-author" hidden></p>
+      <div class="drunk-actions">
+        <button type="button" id="drunk-again" class="btn">Another one</button>
+        <button type="button" id="drunk-close" class="btn ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings" id="settings" hidden>
+    <div class="settings-panel" role="dialog" aria-label="Ember Molten configuration">
+      <h2 class="settings-title">EMBER MOLTEN // CONFIG</h2>
+
+      <label class="field">
+        <span class="field-label">Background image</span>
+        <input type="file" id="image-file" accept="image/*">
+      </label>
+
+      <div class="field">
+        <span class="field-label">...or image URL</span>
+        <div class="row">
+          <input type="url" id="image-url" placeholder="https://example.com/bg.jpg" autocomplete="off">
+          <button type="button" id="image-url-apply" class="btn">Apply</button>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Image opacity <span class="field-value" id="opacity-value">35%</span></span>
+        <input type="range" id="image-opacity" min="0" max="100" value="35">
+      </label>
+
+      <label class="field toggle">
+        <input type="checkbox" id="ember-bg" checked>
+        <span class="field-label">Ember abstract background</span>
+      </label>
+
+      <label class="field">
+        <span class="field-label">Search engine</span>
+        <select id="search-engine">
+          <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+          <option value="https://www.google.com/search?q=">Google</option>
+          <option value="https://www.bing.com/search?q=">Bing</option>
+          <option value="https://search.brave.com/search?q=">Brave</option>
+        </select>
+      </label>
+
+      <div class="field">
+        <span class="field-label">Quick links</span>
+        <div class="quicklinks-editor" id="quicklinks-editor"></div>
+        <div class="row">
+          <input type="text" id="ql-name" placeholder="name" autocomplete="off">
+          <input type="url" id="ql-url" placeholder="https://example.com" autocomplete="off">
+          <button type="button" id="ql-add" class="btn">Add</button>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button type="button" id="clear-image" class="btn ghost">Clear image</button>
+        <button type="button" id="settings-close" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="newtab.js"></script>
+</body>
+</html>
