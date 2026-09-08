@@ -22,18 +22,23 @@ page colors, plus a custom new tab page via `chrome_url_overrides.newtab`.
 ## Use as your home page
 
 Helium ignores `chrome_url_overrides.newtab` from extensions and uses its own
-new tab page. To make Ember Node your home, point Helium at the local file via
-the `--custom-ntp` flag:
+new tab page. To make Ember Node your home, point Helium at the page via the
+`--custom-ntp` flag. The theme is served from GitHub Pages, so it works on any
+machine with no local path:
 
 ```
-file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html
+https://albz.it/helium-themes/ember-molten/newtab.html
 ```
 
 Set it in `chrome://flags` (search "custom-ntp") or launch with:
 
 ```
-open -a Helium --args --custom-ntp="file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html"
+open -a Helium --args --custom-ntp="https://albz.it/helium-themes/ember-molten/newtab.html"
 ```
+
+> The start screen reads its settings from `config.js` in the repo. To
+> customize it, edit `config.js`, commit and push: GitHub Pages rebuilds and
+> the change goes live on every machine that uses the URL.
 
 ## Configure the start screen
 

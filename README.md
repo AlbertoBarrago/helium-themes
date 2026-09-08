@@ -32,14 +32,16 @@ reachable from a theme extension.
 
 Helium ignores `chrome_url_overrides.newtab` from extensions and uses its own
 new tab page. To make a theme's start screen your home, point Helium at the
-local file via the `--custom-ntp` flag (set in `chrome://flags`, search
-"custom-ntp"):
+page via the `--custom-ntp` flag (set in `chrome://flags`, search
+"custom-ntp"). The themes are served from GitHub Pages, so they work on any
+machine with no local path:
 
 ```
-file:///Users/albz/Projects/helium-themes/tokyo-punk/newtab.html
-file:///Users/albz/Projects/helium-themes/ember-molten/newtab.html
+https://albz.it/helium-themes/tokyo-punk/newtab.html
+https://albz.it/helium-themes/ember-molten/newtab.html
 ```
 
 Each theme's start screen is fully configurable from its `config.js` (title,
 brand, search engine, quick links, daily quote, "I feel drunk" quotes and
-jokes, background). Reload the new tab (Cmd+T) after editing.
+jokes, background). Edit `config.js`, commit and push: GitHub Pages rebuilds
+and the change goes live on every machine that uses the URL.
