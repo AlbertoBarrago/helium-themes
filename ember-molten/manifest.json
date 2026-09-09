@@ -51,7 +51,7 @@
 
       "bookmark_text": [245, 220, 200],
 
-      "omnibox_background": [15, 10, 8],
+      "omnibox_background": [30, 20, 15],
       "omnibox_text": [245, 220, 200],
       "omnibox_selection_background": [255, 180, 84],
       "omnibox_selection_foreground": [15, 10, 8],
