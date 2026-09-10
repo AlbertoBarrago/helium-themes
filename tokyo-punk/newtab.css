@@ -415,6 +415,16 @@ body {
 #network.online { color: var(--tp-green); }
 #network.offline { color: var(--tp-red); }
 
+#session {
+  cursor: pointer;
+  user-select: none;
+}
+#session:focus-visible {
+  outline: 1px solid var(--tp-cyan);
+  outline-offset: 2px;
+}
+#session.running { color: var(--tp-cyan); }
+
 /* ============================================================
    Config gear
    ============================================================ */

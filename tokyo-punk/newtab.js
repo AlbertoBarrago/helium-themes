@@ -1,14 +1,12 @@
 /* ============================================================
    Tokyo Punk // Tokyo Node start screen
-   Real data only: local clock, network state, session duration.
+   Real data only: local clock, network state, manual timer.
    Custom background image persisted via chrome.storage.local
    (falls back to localStorage when opened outside an extension).
    ============================================================ */
 
 (function () {
   "use strict";
-
-  const sessionStart = Date.now();
 
   /* --- Storage wrapper: chrome.storage.local when available --- */
   const store = {
@@ -153,15 +151,55 @@
   }
 
   /* ============================================================
-     Session (real: elapsed time since this start screen was opened)
+     Timer (manual stopwatch: click = start/pause, double-click = reset)
+     Persisted as { base, startedAt } so it survives tab switches
+     and browser restarts; elapsed is derived from timestamps.
      ============================================================ */
-  function updateSession() {
-    const elapsedSec = Math.floor((Date.now() - sessionStart) / 1000);
-    const hh = String(Math.floor(elapsedSec / 3600)).padStart(2, "0");
-    const mm = String(Math.floor((elapsedSec % 3600) / 60)).padStart(2, "0");
-    const ss = String(elapsedSec % 60).padStart(2, "0");
-    els.session.textContent = hh + ":" + mm + ":" + ss;
+  const timer = { base: 0, startedAt: null };
+
+  function timerElapsedMs() {
+    return timer.base + (timer.startedAt != null ? Date.now() - timer.startedAt : 0);
   }
+
+  function renderTimer() {
+    const total = Math.floor(timerElapsedMs() / 1000);
+    const hh = String(Math.floor(total / 3600)).padStart(2, "0");
+    const mm = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
+    const ss = String(total % 60).padStart(2, "0");
+    els.session.textContent = hh + ":" + mm + ":" + ss;
+    els.session.classList.toggle("running", timer.startedAt != null);
+  }
+
+  function persistTimer() {
+    store.set("timer", { base: timer.base, startedAt: timer.startedAt });
+  }
+
+  function toggleTimer() {
+    if (timer.startedAt != null) {
+      timer.base = timerElapsedMs();
+      timer.startedAt = null;
+    } else {
+      timer.startedAt = Date.now();
+    }
+    persistTimer();
+    renderTimer();
+  }
+
+  function resetTimer() {
+    timer.base = 0;
+    timer.startedAt = null;
+    persistTimer();
+    renderTimer();
+  }
+
+  els.session.addEventListener("click", toggleTimer);
+  els.session.addEventListener("dblclick", resetTimer);
+  els.session.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleTimer();
+    }
+  });
 
   /* ============================================================
      Background rendering
@@ -426,6 +464,7 @@
       store.get("tokyoBg"),
       store.get("searchEngine"),
       store.get("quickLinks"),
+      store.get("timer"),
     ]);
 
     if (saved[0] != null) state.image = saved[0];
@@ -433,6 +472,10 @@
     if (saved[2] != null) state.tokyoBg = saved[2];
     if (saved[3] != null) state.searchEngine = saved[3];
     if (saved[4] != null) state.quickLinks = saved[4];
+    if (saved[5] != null && typeof saved[5] === "object") {
+      timer.base = Number(saved[5].base) || 0;
+      timer.startedAt = typeof saved[5].startedAt === "number" ? saved[5].startedAt : null;
+    }
 
     applyBackground();
     applyConfig();
@@ -440,11 +483,11 @@
     renderQuickLinks();
     tickClock();
     updateNetwork();
-    updateSession();
+    renderTimer();
 
     setInterval(function () {
       tickClock();
-      updateSession();
+      renderTimer();
     }, 1000);
     window.addEventListener("online", updateNetwork);
     window.addEventListener("offline", updateNetwork);
