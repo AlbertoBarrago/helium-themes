@@ -1,12 +1,14 @@
 /* ============================================================
    Tokyo Punk // Tokyo Node start screen
-   Real data only: local clock, network state, session start.
+   Real data only: local clock, network state, session duration.
    Custom background image persisted via chrome.storage.local
    (falls back to localStorage when opened outside an extension).
    ============================================================ */
 
 (function () {
   "use strict";
+
+  const sessionStart = Date.now();
 
   /* --- Storage wrapper: chrome.storage.local when available --- */
   const store = {
@@ -151,13 +153,14 @@
   }
 
   /* ============================================================
-     Session (real: when this start screen was opened)
+     Session (real: elapsed time since this start screen was opened)
      ============================================================ */
   function updateSession() {
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2, "0");
-    const mm = String(now.getMinutes()).padStart(2, "0");
-    els.session.textContent = hh + ":" + mm;
+    const elapsedSec = Math.floor((Date.now() - sessionStart) / 1000);
+    const hh = String(Math.floor(elapsedSec / 3600)).padStart(2, "0");
+    const mm = String(Math.floor((elapsedSec % 3600) / 60)).padStart(2, "0");
+    const ss = String(elapsedSec % 60).padStart(2, "0");
+    els.session.textContent = hh + ":" + mm + ":" + ss;
   }
 
   /* ============================================================
@@ -439,7 +442,10 @@
     updateNetwork();
     updateSession();
 
-    setInterval(tickClock, 1000);
+    setInterval(function () {
+      tickClock();
+      updateSession();
+    }, 1000);
     window.addEventListener("online", updateNetwork);
     window.addEventListener("offline", updateNetwork);
 
