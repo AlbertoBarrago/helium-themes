@@ -425,6 +425,28 @@ body {
 }
 #session.running { color: var(--tp-cyan); }
 
+.timer-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.timer-btn {
+  background: none;
+  border: 1px solid var(--tp-border);
+  color: var(--tp-text-muted);
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.timer-btn:hover {
+  color: var(--tp-cyan);
+  border-color: var(--tp-cyan);
+}
+
 /* ============================================================
    Config gear
    ============================================================ */

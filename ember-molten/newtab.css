@@ -420,6 +420,28 @@ body {
 }
 #session.running { color: var(--em-amber); }
 
+.timer-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.timer-btn {
+  background: none;
+  border: 1px solid var(--em-border);
+  color: var(--em-text-muted);
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.timer-btn:hover {
+  color: var(--em-amber);
+  border-color: var(--em-amber);
+}
+
 /* ============================================================
    Config gear
    ============================================================ */
