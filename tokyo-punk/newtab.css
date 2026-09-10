@@ -447,6 +447,19 @@ body {
   border-color: var(--tp-cyan);
 }
 
+/* Sections toggled via the config panel */
+[hidden] {
+  display: none !important;
+}
+
+.sections-group .field {
+  margin-bottom: 8px;
+}
+
+.sections-group .field:last-child {
+  margin-bottom: 0;
+}
+
 /* ============================================================
    Config gear
    ============================================================ */

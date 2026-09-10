@@ -37,6 +37,7 @@
   };
 
   const CFG = (typeof window.EMBER_CONFIG === "object" && window.EMBER_CONFIG) || {};
+  const CFG_SECTIONS = (typeof CFG.sections === "object" && CFG.sections) || {};
 
   const DEFAULTS = {
     image: null, // data URL or remote URL
@@ -52,6 +53,13 @@
           { name: "Hacker News", url: "https://news.ycombinator.com" },
           { name: "X", url: "https://x.com" },
         ],
+    sections: {
+      header: CFG_SECTIONS.header !== false,
+      search: CFG_SECTIONS.search !== false,
+      quote: CFG_SECTIONS.quote !== false,
+      quickLinks: CFG_SECTIONS.quickLinks !== false,
+      stats: CFG_SECTIONS.stats !== false,
+    },
   };
 
   const els = {
@@ -62,6 +70,14 @@
     session: document.getElementById("session"),
     timerToggle: document.getElementById("timer-toggle"),
     timerReset: document.getElementById("timer-reset"),
+    header: document.querySelector(".console-header"),
+    footer: document.querySelector(".console-footer"),
+    quote: document.getElementById("quote"),
+    secHeader: document.getElementById("sec-header"),
+    secSearch: document.getElementById("sec-search"),
+    secQuote: document.getElementById("sec-quote"),
+    secQuickLinks: document.getElementById("sec-quicklinks"),
+    secStats: document.getElementById("sec-stats"),
     searchForm: document.getElementById("search-form"),
     searchInput: document.getElementById("search-input"),
     gear: document.getElementById("gear"),
@@ -328,10 +344,10 @@
      Quote of the day (stable for the whole day)
      ============================================================ */
   function applyQuote() {
-    const el = document.getElementById("quote");
+    const el = els.quote;
     if (!el) return;
     const list = Array.isArray(CFG.quotes) ? CFG.quotes : [];
-    if (CFG.showQuote === false || !list.length) {
+    if (!state.sections.quote || CFG.showQuote === false || !list.length) {
       el.hidden = true;
       return;
     }
@@ -343,6 +359,17 @@
     }
     el.textContent = list[hash % list.length];
     el.hidden = false;
+  }
+
+  /* ============================================================
+     Sections visibility
+     ============================================================ */
+  function applySections() {
+    els.header.hidden = !state.sections.header;
+    els.searchForm.hidden = !state.sections.search;
+    els.quicklinks.hidden = !state.sections.quickLinks;
+    els.footer.hidden = !state.sections.stats;
+    applyQuote();
   }
 
   /* ============================================================
@@ -389,6 +416,11 @@
     els.opacityValue.textContent = state.imageOpacity + "%";
     els.emberBg.checked = state.emberBg;
     els.searchEngine.value = state.searchEngine;
+    els.secHeader.checked = state.sections.header;
+    els.secSearch.checked = state.sections.search;
+    els.secQuote.checked = state.sections.quote;
+    els.secQuickLinks.checked = state.sections.quickLinks;
+    els.secStats.checked = state.sections.stats;
     renderQuickLinksEditor();
   }
 
@@ -450,6 +482,22 @@
     store.set("searchEngine", state.searchEngine);
   });
 
+  /* --- Sections visibility --- */
+  const SECTION_TOGGLES = [
+    ["secHeader", "header"],
+    ["secSearch", "search"],
+    ["secQuote", "quote"],
+    ["secQuickLinks", "quickLinks"],
+    ["secStats", "stats"],
+  ];
+  SECTION_TOGGLES.forEach(([elKey, secKey]) => {
+    els[elKey].addEventListener("change", () => {
+      state.sections[secKey] = els[elKey].checked;
+      applySections();
+      store.set("sections", state.sections);
+    });
+  });
+
   /* --- Clear image --- */
   els.clearImage.addEventListener("click", () => {
     state.image = null;
@@ -470,6 +518,7 @@
       store.get("searchEngine"),
       store.get("quickLinks"),
       store.get("timer"),
+      store.get("sections"),
     ]);
 
     if (saved[0] != null) state.image = saved[0];
@@ -488,10 +537,13 @@
       }
       timer.startedAt = null;
     }
+    if (saved[6] != null && typeof saved[6] === "object") {
+      state.sections = Object.assign({}, state.sections, saved[6]);
+    }
 
     applyBackground();
     applyConfig();
-    applyQuote();
+    applySections();
     renderQuickLinks();
     tickClock();
     updateNetwork();

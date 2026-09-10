@@ -442,6 +442,19 @@ body {
   border-color: var(--em-amber);
 }
 
+/* Sections toggled via the config panel */
+[hidden] {
+  display: none !important;
+}
+
+.sections-group .field {
+  margin-bottom: 8px;
+}
+
+.sections-group .field:last-child {
+  margin-bottom: 0;
+}
+
 /* ============================================================
    Config gear
    ============================================================ */
