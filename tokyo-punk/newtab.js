@@ -153,9 +153,10 @@
   }
 
   /* ============================================================
-     Timer (manual stopwatch: click = start/pause, double-click = reset)
-     Persisted as { base, startedAt } so it survives tab switches
-     and browser restarts; elapsed is derived from timestamps.
+     Timer (manual stopwatch: click on the value = start/pause,
+     buttons below = start/pause + reset). Persisted as { base,
+     startedAt } so the total survives reloads; a reload while
+     running folds the elapsed into base and pauses.
      ============================================================ */
   const timer = { base: 0, startedAt: null };
 
@@ -478,7 +479,14 @@
     if (saved[4] != null) state.quickLinks = saved[4];
     if (saved[5] != null && typeof saved[5] === "object") {
       timer.base = Number(saved[5].base) || 0;
-      timer.startedAt = typeof saved[5].startedAt === "number" ? saved[5].startedAt : null;
+      if (typeof saved[5].startedAt === "number") {
+        // Reloaded while running: fold the elapsed into base and pause, so
+        // the value is exact from first paint and a stop can never jump
+        // ahead of what was displayed. Time counts only while a new tab
+        // page is actually alive (Chrome may discard background ones).
+        timer.base += Math.max(0, Date.now() - saved[5].startedAt);
+      }
+      timer.startedAt = null;
     }
 
     applyBackground();
