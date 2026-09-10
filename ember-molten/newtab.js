@@ -68,8 +68,6 @@
     clock: document.getElementById("clock"),
     network: document.getElementById("network"),
     session: document.getElementById("session"),
-    timerToggle: document.getElementById("timer-toggle"),
-    timerReset: document.getElementById("timer-reset"),
     header: document.querySelector(".console-header"),
     footer: document.querySelector(".console-footer"),
     quote: document.getElementById("quote"),
@@ -187,7 +185,6 @@
     const ss = String(total % 60).padStart(2, "0");
     els.session.textContent = hh + ":" + mm + ":" + ss;
     els.session.classList.toggle("running", timer.startedAt != null);
-    els.timerToggle.textContent = timer.startedAt != null ? "STOP" : "START";
   }
 
   function persistTimer() {
@@ -213,8 +210,7 @@
   }
 
   els.session.addEventListener("click", toggleTimer);
-  els.timerToggle.addEventListener("click", toggleTimer);
-  els.timerReset.addEventListener("click", resetTimer);
+  els.session.addEventListener("dblclick", resetTimer);
   els.session.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
